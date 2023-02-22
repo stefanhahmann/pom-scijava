@@ -1,0 +1,61 @@
+CTR START HERE:
+
+- faster melting pot caching
+ -- why do some dep sets not match? dig into a few.
+ -- it happens when the project in question extends a *too-old pom-scijava version*,
+    which does not manage the skewed component(s) in question, and therefore cannot
+    override the version(s) using version properties as the melting pot needs.
+
+- transitive third party unmanaged deps have skew. possible solutions:
+ 1. manage them all in pom-scijava
+   - and add flag to the melting-pot to fail if any whatsoever are detected
+ 2. make the melting pot more aggressive, hacking pom.xml files
+   - hard to get right
+
+- change release-version.sh to fail the release if any hardcoded <version>s.
+ -- with advice on how to fix it.
+
+This is an unfortunate situation, though, because the
+failures occur due to *new transitive dependencies*.
+Example:
+- scifio-lifesci had skew with scijava-table, where setting
+  scijava-table.version did not override the transitively
+  inherited version from its imagej-common dependency.
+- At time of release, scifio-lifesci extends pom-scijava 22,
+  which inherits a version of imagej-common that
+  *does not depend on scijava-table*.
+- Then, later, a newer version of imagej-common *does* start
+  depending on scijava-table, and scijava-table is added to
+  the pom-scijava BOM.
+- We can override the version of imagej-common that the old
+  scifio-lifesci uses... but we *can't* override the version
+  of scijava-table it inherits, which will always be the one
+  inherited from the new imagej-common version "by default",
+  i.e. the one managed by that imagej-common's linked BOM.
+- Therefore: any time a new unmanaged dependency leaks into
+  the mix in this fashion, each affected component will need
+  a new release with a new-enough BOM managing the new dep.
+
+
+-------------------
+
+Psj34 release:
+- scijava-common 2.90.2 breaks imagej-ops -- need to revert convertservice change in favor of one static minimal convertservice.
+- then release scijava-common 2.90.3 after testing it with imagej-ops
+- update ij1-patcher to support ij 1.54b and release it
+- update pom-scijava with the new releases
+- ensure mega-melt passes
+- pause the CI, preemptive bump fiji and imagej2 to 2.10.0, preemptive bump imglib2-imglyb to 1.1.0 or whatever
+- release pom-scijava 34.0.0
+- merge imglib/imglib2-imglyb#10 and release it
+- release imagej2 2.10.0
+- release fiji 2.10.0
+- unpause the pom-scijava CI
+- release all components in release-me.txt
+- then bump those versions in pom-scijava
+- then make another new pom-scijava release (34.0.1 or 34.1.0 as appropriate)
+
+-------------------
+
+status.scijava.org -- migrate XML rules here
+- and add rules for asm, jetty, logback, keeping them at Java-8-compatible versions.
