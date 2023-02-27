@@ -95,10 +95,12 @@ chmod +x "$meltingPotScript" &&
   -i 'net.imglib2:*' \
   -i 'net.preibisch:*' \
   -i 'org.bonej:*' \
+  -i 'org.embl.mobie:*' \
   -i 'org.janelia.saalfeldlab:*' \
   -i 'org.janelia:*' \
   -i 'org.morphonets:*' \
   -i 'org.scijava:*' \
+  -i 'saalfeldlab:*' \
   -i 'sc.fiji:*' \
   -e 'net.imagej:ij' \
   -e 'org.scijava:j3dcore' \
@@ -111,7 +113,7 @@ chmod +x "$meltingPotScript" &&
 # NB: The pipe to tee eats the melting-pot error code.
 # Even with the POSIX-unfriendly pipefail flag set.
 # So we resort to this hacky error check of the log.
-grep -qF "[ERROR]" "$meltingPotLog" &&
+test "$(grep -F "[ERROR]" "$meltingPotLog" | grep -v "using default branch")" &&
   die 'Melting pot generation failed!'
 
 sectionStart 'Adjusting the melting pot'

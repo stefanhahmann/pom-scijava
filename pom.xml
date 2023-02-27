@@ -581,11 +581,12 @@
 		<!-- ImgLib2 - https://github.com/imglib -->
 
 		<!-- ImgLib2 - https://github.com/imglib/imglib2 -->
-		<imglib2.version>5.12.0</imglib2.version>
+		<imglib2.version>6.1.0-SNAPSHOT</imglib2.version> <!-- TEMP -->
 		<net.imglib2.imglib2.version>${imglib2.version}</net.imglib2.imglib2.version>
 
 		<!-- ImgLib2 Algorithms - https://github.com/imglib/imglib2-algorithm -->
-		<imglib2-algorithm.version>0.13.0</imglib2-algorithm.version>
+		<!-- TEMP - https://github.com/imglib/imglib2-algorithm/tree/bump-to-imglib2-6.1.0 -->
+		<imglib2-algorithm.version>0.13.1-SNAPSHOT</imglib2-algorithm.version>
 		<net.imglib2.imglib2-algorithm.version>${imglib2-algorithm.version}</net.imglib2.imglib2-algorithm.version>
 
 		<!-- ImgLib2 Algorithms FFT - https://github.com/imglib/imglib2-algorithm-fft -->
@@ -597,7 +598,8 @@
 		<net.imglib2.imglib2-algorithm-gpl.version>${imglib2-algorithm-gpl.version}</net.imglib2.imglib2-algorithm-gpl.version>
 
 		<!-- ImgLib2 Cache - https://github.com/imglib/imglib2-cache -->
-		<imglib2-cache.version>1.0.0-beta-16</imglib2-cache.version>
+		<!-- TEMP - https://github.com/imglib/imglib2-cache/tree/bump-to-imglib2-6.1.0 -->
+		<imglib2-cache.version>1.0.0-beta-17-SNAPSHOT</imglib2-cache.version>
 		<net.imglib2.imglib2-cache.version>${imglib2-cache.version}</net.imglib2.imglib2-cache.version>
 
 		<!-- ImgLib2 IJ - https://github.com/imglib/imglib2-ij -->
@@ -1008,7 +1010,8 @@
 		<!-- BigDataViewer - https://github.com/bigdataviewer -->
 
 		<!-- BigDataViewer Core - https://github.com/bigdataviewer/bigdataviewer-core -->
-		<bigdataviewer-core.version>10.4.5</bigdataviewer-core.version>
+		<!-- TEMP - https://github.com/bigdataviewer/bigdataviewer-core/tree/imglib2-6.1.0 -->
+		<bigdataviewer-core.version>10.4.6-SNAPSHOT</bigdataviewer-core.version>
 		<sc.fiji.bigdataviewer-core.version>${bigdataviewer-core.version}</sc.fiji.bigdataviewer-core.version>
 
 		<!-- BigDataServer - https://github.com/bigdataviewer/bigdataviewer-server -->
@@ -1129,7 +1132,8 @@
 		<org.janelia.saalfeldlab.n5-ij.version>${n5-ij.version}</org.janelia.saalfeldlab.n5-ij.version>
 
 		<!-- N5 ImgLib2 Bindings - https://github.com/saalfeldlab/n5-imglib2 -->
-		<n5-imglib2.version>4.4.0</n5-imglib2.version>
+		<!-- TEMP - https://github.com/saalfeldlab/n5-imglib2/tree/bump-to-imglib2-6.1.0 -->
+		<n5-imglib2.version>4.4.1-SNAPSHOT</n5-imglib2.version>
 		<org.janelia.saalfeldlab.n5-imglib2.version>${n5-imglib2.version}</org.janelia.saalfeldlab.n5-imglib2.version>
 
 		<!-- N5 Viewer for Fiji - https://github.com/saalfeldlab/n5-viewer_fiji -->
@@ -1167,7 +1171,8 @@
 
 		<!-- BigStitcher - https://imagej.net/plugins/bigstitcher -->
 		<BigStitcher.version>0.8.3</BigStitcher.version>
-		<multiview-reconstruction.version>0.11.5</multiview-reconstruction.version>
+		<!-- TEMP - https://github.com/PreibischLab/multiview-reconstruction/tree/bump-to-imglib2-6.1.0 -->
+		<multiview-reconstruction.version>1.2.6-SNAPSHOT</multiview-reconstruction.version>
 		<multiview-simulation.version>0.2.0</multiview-simulation.version>
 		<net.preibisch.BigStitcher.version>${BigStitcher.version}</net.preibisch.BigStitcher.version>
 		<net.preibisch.multiview-reconstruction.version>${multiview-reconstruction.version}</net.preibisch.multiview-reconstruction.version>
@@ -2253,6 +2258,11 @@
 		<!-- XZ for Java - https://tukaani.org/xz/java.html -->
 		<xz.version>1.9</xz.version>
 		<org.tukaani.xz.version>${xz.version}</org.tukaani.xz.version>
+
+		<!-- TEMP - for imglib2 6.1.0-SNAPSHOT -->
+		<enforcer.skip>true</enforcer.skip>
+		<saalfeldlab.hot-knife.version>0.0.4-SNAPSHOT</saalfeldlab.hot-knife.version>
+		<org.embl.mobie.mobie-io.version>2.0.11-SNAPSHOT</org.embl.mobie.mobie-io.version>
 	</properties>
 
 	<dependencyManagement>
@@ -6403,6 +6413,20 @@
 				<groupId>org.tukaani</groupId>
 				<artifactId>xz</artifactId>
 				<version>${org.tukaani.xz.version}</version>
+			</dependency>
+
+			<!-- TEMP - for imglib2 6.1.0 -->
+			<dependency>
+				<!-- https://github.com/saalfeldlab/hot-knife/tree/bump-to-imglib2-6.1.0 -->
+				<groupId>saalfeldlab</groupId>
+				<artifactId>hot-knife</artifactId>
+				<version>${saalfeldlab.hot-knife.version}</version>
+			</dependency>
+			<dependency>
+				<!-- https://github.com/tpietzsch/mobie-io/tree/bump-to-imglib2-6.1.0 -->
+				<groupId>org.embl.mobie</groupId>
+				<artifactId>mobie-io</artifactId>
+				<version>${org.embl.mobie.mobie-io.version}</version>
 			</dependency>
 
 			<!-- Test scope dependencies -->
